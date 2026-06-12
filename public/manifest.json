@@ -1,0 +1,25 @@
+{
+  "name": "BlazorPath",
+  "short_name": "BlazorPath",
+  "description": "Master the Blazor framework through swipeable learning cards",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0E0E10",
+  "background_color": "#0E0E10",
+  "categories": ["education", "developer tools"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

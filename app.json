@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "BlazorPath",
+    "slug": "blazorpath",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0E0E10",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0E0E10"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.blazorpath.app",
+      "buildNumber": "1"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0E0E10"
+      },
+      "package": "com.blazorpath.app"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "scheme": "blazorpath",
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "81372314-9e4b-409d-822d-dc8108375f9d"
+      }
+    },
+    "owner": "maksimsracins"
+  }
+}
