@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "BlazorPath",
+    "name": "Blazor Mastery",
     "slug": "blazorpath",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,7 +15,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.blazorpath.app",
-      "buildNumber": "1",
+      "buildNumber": "4",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
