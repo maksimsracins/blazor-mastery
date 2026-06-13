@@ -51,8 +51,17 @@ target 'BlazorPath' do
     )
 
     # Fix fmt/Hermes consteval incompatibility with Xcode 26 / Apple Clang 17+
-    # FMT_CONSTEVAL=constexpr downgrades immediate functions to constexpr so
-    # non-constant-expression call sites no longer cause a hard error.
+    # Patch the fmt header directly so FMT_CONSTEVAL becomes constexpr.
+    # Compiler flags alone are unreliable when fmt redefines the macro without #ifndef.
+    fmt_headers = Dir.glob("#{installer.sandbox.root}/**/{base,core,format}.h").select { |f| f.include?('/fmt/') }
+    fmt_headers.each do |f|
+      content = File.read(f)
+      if content.include?('define FMT_CONSTEVAL consteval')
+        File.write(f, content.gsub('define FMT_CONSTEVAL consteval', 'define FMT_CONSTEVAL constexpr'))
+        Pod::UI.puts "Patched FMT_CONSTEVAL in #{f}"
+      end
+    end
+
     installer.pods_project.targets.each do |target|
       target.build_configurations.each do |config|
         config.build_settings['OTHER_CPLUSPLUSFLAGS'] = '$(inherited) -DFMT_USE_CONSTEVAL=0 -DFMT_CONSTEVAL=constexpr'
