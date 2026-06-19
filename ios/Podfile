@@ -54,11 +54,16 @@ target 'BlazorPath' do
     # Patch the fmt header directly so FMT_CONSTEVAL becomes constexpr.
     # Compiler flags alone are unreliable when fmt redefines the macro without #ifndef.
     fmt_headers = Dir.glob("#{installer.sandbox.root}/**/{base,core,format}.h").select { |f| f.include?('/fmt/') }
+    patched = {}
     fmt_headers.each do |f|
-      content = File.read(f)
+      real_f = File.realpath(f)
+      next if patched[real_f]
+      content = File.read(real_f)
       if content.include?('define FMT_CONSTEVAL consteval')
-        File.write(f, content.gsub('define FMT_CONSTEVAL consteval', 'define FMT_CONSTEVAL constexpr'))
-        Pod::UI.puts "Patched FMT_CONSTEVAL in #{f}"
+        FileUtils.chmod('u+w', real_f)
+        File.write(real_f, content.gsub('define FMT_CONSTEVAL consteval', 'define FMT_CONSTEVAL constexpr'))
+        patched[real_f] = true
+        Pod::UI.puts "Patched FMT_CONSTEVAL in #{real_f}"
       end
     end
 
