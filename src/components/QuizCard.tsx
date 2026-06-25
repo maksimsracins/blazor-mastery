@@ -12,6 +12,7 @@ import { C, tierColor, tierBg } from '../constants/colors';
 interface QuizCardProps {
   quiz: QuizCardType;
   onAnswer: (quizId: string, correct: boolean) => void;
+  hideSwipeHint?: boolean;
 }
 
 function shuffle<T>(arr: T[]): T[] {
@@ -23,7 +24,7 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-export default function QuizCard({ quiz, onAnswer }: QuizCardProps) {
+export default function QuizCard({ quiz, onAnswer, hideSwipeHint }: QuizCardProps) {
   const [answered, setAnswered] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [selectedFill, setSelectedFill] = useState<string | null>(null);
@@ -267,7 +268,7 @@ export default function QuizCard({ quiz, onAnswer }: QuizCardProps) {
         </View>
       )}
 
-      {answered && (
+      {answered && !hideSwipeHint && (
         <Text style={styles.swipeHint}>Swipe right to continue →</Text>
       )}
     </ScrollView>

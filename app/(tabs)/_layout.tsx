@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Svg, { Path, Rect, Line } from 'react-native-svg';
+import Svg, { Path, Rect, Line, Polyline } from 'react-native-svg';
 import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { C } from '../../src/constants/colors';
 
@@ -42,9 +42,19 @@ function ProgressIcon({ color }: { color: string }) {
   );
 }
 
+function QuizIcon({ color }: { color: string }) {
+  return (
+    <Svg width={22} height={22} viewBox="0 0 24 24" fill="none">
+      <Rect x="3" y="3" width="18" height="18" rx="3" stroke={color} strokeWidth="1.75" />
+      <Polyline points="9,12 11,14 15,10" stroke={color} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+    </Svg>
+  );
+}
+
 const TAB_CONFIG: Record<string, { label: string; Icon: React.ComponentType<{ color: string }> }> = {
   index: { label: 'Home', Icon: HomeIcon },
   learn: { label: 'Learn', Icon: LearnIcon },
+  quiz: { label: 'Quiz', Icon: QuizIcon },
   glossary: { label: 'Glossary', Icon: GlossaryIcon },
   progress: { label: 'Progress', Icon: ProgressIcon },
 };
@@ -93,6 +103,7 @@ export default function TabsLayout() {
     >
       <Tabs.Screen name="index" />
       <Tabs.Screen name="learn" />
+      <Tabs.Screen name="quiz" />
       <Tabs.Screen name="glossary" />
       <Tabs.Screen name="progress" />
     </Tabs>
